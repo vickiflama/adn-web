@@ -77,5 +77,16 @@
   dialog.addEventListener("click", function (e) {
     if (e.target === dialog) dialog.close(); // clic en el fondo oscuro
   });
-  dialog.addEventListener("close", function () { openBtn.focus(); });
+  dialog.addEventListener("close", function () { openBtn.focus({ preventScroll: true }); });
+
+// Link "Consultanos": cerrar el mapa y bajar a la sección Contacto
+var contactLink = dialog.querySelector("[data-goto-contact]");
+if (contactLink) {
+  contactLink.addEventListener("click", function (e) {
+    e.preventDefault();
+    dialog.close();
+    var target = document.getElementById("contacto");
+    if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+}
 })();
