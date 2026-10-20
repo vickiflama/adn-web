@@ -331,6 +331,42 @@ body:has(dialog[open]) { overflow: hidden; }
   .whatsapp-fab span { display: none; }
 }
 
+/* Privacidad */
+.consent { display: flex; align-items: flex-start; gap: 10px; font-size: 15px; color: var(--text); }
+.consent input { flex: none; width: 18px; height: 18px; margin-top: 3px; accent-color: var(--blue); }
+.link-btn--inline { display: inline; min-height: 0; margin: 0; font-size: inherit; }
+.link-btn--footer { margin: 0; min-height: 0; font-size: 15px; font-weight: 500; color: var(--muted); text-decoration: none; }
+.link-btn--footer:hover { color: var(--blue); }
+
+/* Quiénes somos */
+.about { display: flex; flex-wrap: wrap; gap: 56px; align-items: center; }
+.about__text { flex: 1 1 480px; min-width: 0; }
+.about__text > p:not(.eyebrow) { margin-top: 20px; max-width: 560px; color: var(--text); }
+.about__values { margin-top: 32px; display: flex; flex-direction: column; gap: 16px; max-width: 560px; }
+.about__values li { padding-top: 16px; border-top: 1px solid var(--line); color: var(--text); }
+.about__values strong { display: block; margin-bottom: 2px; font-family: var(--font-display); font-weight: 700; font-size: 19px; color: var(--ink); }
+.about__media {
+  flex: 1 1 380px; min-width: 0; aspect-ratio: 4 / 3; border-radius: 24px;
+  background: var(--surface); border: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: center; padding: 32px;
+  text-align: center; color: var(--muted); font-size: 15px; overflow: hidden;
+}
+.about__media img { width: 100%; height: 100%; object-fit: cover; }
+/* Misión, visión y valores */
+.pillars { margin-top: 56px; display: flex; flex-wrap: wrap; gap: 20px; }
+.pillar {
+  flex: 1 1 300px; min-width: 0; padding: 32px; border-radius: 24px;
+  background: var(--surface); border: 1px solid var(--line-soft);
+  display: flex; flex-direction: column; gap: 16px;
+}
+.pillar h3 { font-family: var(--font-display); font-weight: 700; font-size: 26px; }
+.pillar p { color: var(--text); }
+.pillar__tags { display: flex; flex-wrap: wrap; gap: 10px; }
+.pillar__tags li {
+  padding: 8px 16px; border-radius: 999px; background: var(--white);
+  border: 1px solid var(--line); font-weight: 500; font-size: 15px;
+}
+
 /* Mobile */
 @media (max-width: 720px) {
   .container { padding-inline: 20px; }

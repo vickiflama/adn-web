@@ -127,3 +127,23 @@ if (contactLink) {
   d.addEventListener("click", function (e) { if (e.target === d) d.close(); });
   d.addEventListener("close", function () { openBtn.focus({ preventScroll: true }); });
 })();
+
+/* Política de privacidad */
+(function () {
+  var d = document.getElementById("privacy-dialog");
+  if (!d) return;
+  var closeBtn = d.querySelector("[data-close-privacy]");
+  var lastTrigger = null;
+  document.querySelectorAll("[data-open-privacy]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      lastTrigger = btn;
+      d.showModal();
+      closeBtn.focus();
+    });
+  });
+  closeBtn.addEventListener("click", function () { d.close(); });
+  d.addEventListener("click", function (e) { if (e.target === d) d.close(); });
+  d.addEventListener("close", function () {
+    if (lastTrigger) lastTrigger.focus({ preventScroll: true });
+  });
+})();
