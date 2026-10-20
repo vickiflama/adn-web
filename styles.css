@@ -298,7 +298,8 @@ body:has(dialog[open]) { overflow: hidden; }
 .supplier-dialog { width: min(720px, calc(100% - 32px)); }
 .supplier-dialog .map-dialog__head { background: var(--blue); color: var(--white); padding-bottom: 28px; }
 .supplier-dialog .eyebrow { color: rgba(255, 255, 255, 0.8); }
-.supplier-dialog__lead { margin-top: 10px; max-width: 460px; color: rgba(255, 255, 255, 0.9); font-size: 16px; }
+.supplier-dialog__lead { margin-top: 10px; color: rgba(255, 255, 255, 0.9); font-size: 16px; }
+.supplier-dialog .map-dialog__head > div { flex: 1; min-width: 0; }
 .supplier-dialog .map-dialog__close { background: transparent; border-color: rgba(255, 255, 255, 0.5); color: var(--white); }
 .supplier-dialog .map-dialog__close:hover { background: var(--white); border-color: var(--white); color: var(--blue); }
 .supplier-form { padding: 28px 32px 32px; display: flex; flex-direction: column; gap: 20px; }

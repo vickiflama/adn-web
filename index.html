@@ -27,7 +27,6 @@
         <nav class="nav" aria-label="Principal">
             <a href="#marcas">Marcas</a>
             <a href="#clientes">Para tu negocio</a>
-            <a href="#sorteo">Sorteo mensual</a>
             <button class="btn btn--ghost" type="button" data-open-supplier>Soy proveedor</button>
             <a class="btn btn--primary" href="#contacto">Quiero ser cliente</a>
         </nav>
@@ -200,29 +199,7 @@
             <p class="note">Trabajamos con comercios de barrio, autoservicios y supermercados.</p>
         </section>
 
-        <!-- Sorteo -->
-        <section id="sorteo" class="container section">
-            <div class="raffle">
-                <div class="raffle__text">
-                    <p class="eyebrow">Sorteo mensual de clientes</p>
-                    <h2>Comprar en ADN <span class="accent">tiene premio.</span></h2>
-                    <p>Cada mes sorteamos entre nuestros clientes una orden de compra o un descuento sobre tu próxima
-                        compra. Cuanto más te abastecés con nosotros, más chances tenés de ganar.</p>
-                    <button class="link-btn" type="button" data-open-terms>Ver bases y condiciones</button>
-                </div>
-                <div class="raffle__prizes">
-                    <div class="prize">
-                        <div class="prize__label">Premio · Orden de compra</div>
-                        <div class="prize__value">$ [MONTO]</div>
-                    </div>
-                    <div class="prize prize--blue">
-                        <div class="prize__label">Premio · Descuento</div>
-                        <div class="prize__value">[X]% en tu próxima compra</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
+    
         <!-- Contacto -->
         <section id="contacto" class="container contact">
             <div class="contact__info">
@@ -265,8 +242,9 @@
     <footer class="footer">
         <div class="container footer__inner">
             <span>© 2026 Alimentos del NEA S.A. · Todos los derechos reservados</span>
-            <span class="footer__social"><a href="https://www.instagram.com/alimentosdelnea_">Instagram</a><a
-                    href="https://www.facebook.com/profile.php?id=61587382507731">Facebook</a></span>
+            <span class="footer__social"><a href="https://www.instagram.com/alimentosdelnea_">Instagram</a>
+                <a href="https://www.facebook.com/profile.php?id=61587382507731">Facebook</a>
+            <a href="https://www.linkedin.com/company/alimentos-del-nea-sa">Linkedin</a></span>
         </div>
     </footer>
 
@@ -311,46 +289,7 @@
         </div>
     </dialog>
 
-    <dialog id="terms-dialog" class="map-dialog" aria-labelledby="terms-title">
-        <div class="map-dialog__head">
-            <div>
-                <p class="eyebrow">Sorteo mensual de clientes</p>
-                <h2 id="terms-title" class="map-dialog__title">Bases y condiciones</h2>
-            </div>
-            <button class="map-dialog__close" type="button" data-close-terms aria-label="Cerrar bases y condiciones">
-                <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    stroke-width="2" stroke-linecap="round">
-                    <path d="M6 6l12 12M18 6L6 18" />
-                </svg>
-            </button>
-        </div>
-        <ol class="terms">
-            <li>
-                <h3>Quiénes participan</h3>
-                <p>[Completar: clientes activos con compras en el mes, requisitos, exclusiones.]</p>
-            </li>
-            <li>
-                <h3>Cómo se participa</h3>
-                <p>[Completar: monto mínimo de compra, cantidad de chances, etc.]</p>
-            </li>
-            <li>
-                <h3>Premios</h3>
-                <p>[Completar: orden de compra por $ [MONTO] o descuento del [X]% en la próxima compra.]</p>
-            </li>
-            <li>
-                <h3>Cuándo y cómo se sortea</h3>
-                <p>[Completar: fecha del sorteo, modalidad, transmisión o registro.]</p>
-            </li>
-            <li>
-                <h3>Cómo se avisa al ganador</h3>
-                <p>[Completar: medio de contacto y plazo para reclamar el premio.]</p>
-            </li>
-            <li>
-                <h3>Vigencia y otras condiciones</h3>
-                <p>[Completar: vigencia, validez del descuento, cambios o cancelación.]</p>
-            </li>
-        </ol>
-    </dialog>
+
 
 <dialog id="supplier-dialog" class="map-dialog supplier-dialog" aria-labelledby="supplier-title">
   <div class="map-dialog__head">
