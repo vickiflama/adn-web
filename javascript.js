@@ -1,10 +1,30 @@
-/* Alimentos del NEA — mapa de zonas de reparto (Leaflet + OpenStreetMap) */
-(function () {
-  var dialog = document.getElementById("map-dialog");
-  if (!dialog) return;
+/* Alimentos del NEA — ventanas, mapa de reparto y menú */
 
-  var openBtn = document.querySelector("[data-open-map]");
-  var closeBtn = dialog.querySelector("[data-close-map]");
+/* Ventanas (dialog) genéricas: abrir con varios botones, cerrar con X / fondo / Esc */
+function setupDialog(id, triggerSelector, onOpen) {
+  var d = document.getElementById(id);
+  if (!d) return null;
+  var last = null;
+  document.querySelectorAll(triggerSelector).forEach(function (t) {
+    t.addEventListener("click", function () {
+      last = t;
+      // si se abre desde otra ventana (ej. privacidad desde el formulario de proveedores), no cerramos la anterior
+      d.showModal();
+      if (onOpen) onOpen(d);
+    });
+  });
+  d.querySelectorAll("[data-close-dialog]").forEach(function (b) {
+    b.addEventListener("click", function () { d.close(); });
+  });
+  d.addEventListener("click", function (e) { if (e.target === d) d.close(); });
+  d.addEventListener("close", function () {
+    if (last && document.contains(last)) last.focus({ preventScroll: true });
+  });
+  return d;
+}
+
+/* Mapa de zonas de reparto (Leaflet + OpenStreetMap) */
+(function () {
   var mapEl = document.getElementById("delivery-map");
   var fallback = document.getElementById("map-fallback");
   var map = null;
@@ -12,14 +32,16 @@
   // Punto de partida y destinos (coordenadas aproximadas, provincia de Santa Fe)
   var ORIGIN = { name: "Reconquista", sub: "Punto de partida", lat: -29.1436, lng: -59.6431, tip: "right" };
   var STOPS = [
-  { name: "Avellaneda",   lat: -29.1167, lng: -59.65,   tip: "left" },
-  { name: "Villa Ocampo", lat: -28.4833, lng: -59.3667, tip: "right" },
-  { name: "Florencia",    lat: -28.0333, lng: -59.2,    tip: "right" },
-  { name: "Vera",         lat: -29.4667, lng: -60.2167, tip: "left" },
-  { name: "Calchaquí",    lat: -29.8914, lng: -60.2989, tip: "left" },
-  { name: "Romang",       lat: -29.5,    lng: -59.77,   tip: "right", chain: true },
-  { name: "Alejandra",    lat: -29.75,   lng: -59.85,   tip: "right", chain: true }
-];
+    { name: "Avellaneda",   lat: -29.1167, lng: -59.65,   tip: "left" },
+    { name: "Villa Ocampo", lat: -28.4833, lng: -59.3667, tip: "right" },
+    { name: "Florencia",    lat: -28.0333, lng: -59.2,    tip: "right" },
+    { name: "Vera",         lat: -29.4667, lng: -60.2167, tip: "left" },
+    { name: "Calchaquí",    lat: -29.8914, lng: -60.2989, tip: "left" },
+    { name: "Romang",       lat: -29.5,    lng: -59.77,   tip: "right", chain: true },
+    { name: "Alejandra",    lat: -29.75,   lng: -59.85,   tip: "right", chain: true }
+  ];
+  // Ruta Provincial 1: Reconquista → Romang → Alejandra
+  var RUTA1 = [[ORIGIN.lat, ORIGIN.lng], [-29.5, -59.77], [-29.75, -59.85]];
 
   function pinIcon(isOrigin) {
     var size = isOrigin ? 44 : 32;
@@ -45,6 +67,7 @@
       fallback.hidden = false;
       return;
     }
+    var line = { color: "#2e3093", weight: 3, opacity: 0.7, dashArray: "8 8" };
     map = L.map(mapEl, { scrollWheelZoom: false });
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxZoom: 18,
@@ -52,23 +75,14 @@
     }).addTo(map);
 
     var bounds = [[ORIGIN.lat, ORIGIN.lng]];
-
     STOPS.forEach(function (s) {
-      if (!s.chain) {
-        L.polyline([[ORIGIN.lat, ORIGIN.lng], [s.lat, s.lng]], {
-          color: "#2e3093", weight: 3, opacity: 0.7, dashArray: "8 8"
-        }).addTo(map);
-      }
+      if (!s.chain) L.polyline([[ORIGIN.lat, ORIGIN.lng], [s.lat, s.lng]], line).addTo(map);
       L.marker([s.lat, s.lng], { icon: pinIcon(false), title: s.name, keyboard: false })
         .addTo(map)
         .bindTooltip(s.name, { permanent: true, direction: s.tip, offset: [s.tip === "left" ? -8 : 8, -14], className: "map-label" });
       bounds.push([s.lat, s.lng]);
     });
-
-    // Ruta Provincial 1: Reconquista → Romang → Alejandra
-    L.polyline([[ORIGIN.lat, ORIGIN.lng], [-29.5, -59.77], [-29.75, -59.85]], {
-      color: "#2e3093", weight: 3, opacity: 0.7, dashArray: "8 8"
-    }).addTo(map);
+    L.polyline(RUTA1, line).addTo(map);
 
     L.marker([ORIGIN.lat, ORIGIN.lng], { icon: pinIcon(true), title: ORIGIN.name, zIndexOffset: 1000, keyboard: false })
       .addTo(map)
@@ -77,73 +91,46 @@
     map.fitBounds(bounds, { padding: [48, 48] });
   }
 
-  openBtn.addEventListener("click", function () {
-    dialog.showModal();
-    initMap();
-    closeBtn.focus();
-  });
-  closeBtn.addEventListener("click", function () { dialog.close(); });
-  dialog.addEventListener("click", function (e) {
-    if (e.target === dialog) dialog.close(); // clic en el fondo oscuro
-  });
-  dialog.addEventListener("close", function () { openBtn.focus({ preventScroll: true }); });
+  var mapDialog = setupDialog("map-dialog", "[data-open-map]", function () { initMap(); });
 
-// Link "Consultanos": cerrar el mapa y bajar a la sección Contacto
-var contactLink = dialog.querySelector("[data-goto-contact]");
-if (contactLink) {
-  contactLink.addEventListener("click", function (e) {
-    e.preventDefault();
-    dialog.close();
-    var target = document.getElementById("contacto");
-    if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
-  });
-}
-})();
-
-
-/* Bases y condiciones del sorteo */
-(function () {
-  var d = document.getElementById("terms-dialog");
-  if (!d) return;
-  var openBtn = document.querySelector("[data-open-terms]");
-  var closeBtn = d.querySelector("[data-close-terms]");
-  openBtn.addEventListener("click", function () { d.showModal(); closeBtn.focus(); });
-  closeBtn.addEventListener("click", function () { d.close(); });
-  d.addEventListener("click", function (e) { if (e.target === d) d.close(); });
-  d.addEventListener("close", function () { openBtn.focus({ preventScroll: true }); });
+  // "Consultanos": cerrar el mapa y bajar a Contacto
+  var contactLink = document.querySelector("[data-goto-contact]");
+  if (contactLink && mapDialog) {
+    contactLink.addEventListener("click", function (e) {
+      e.preventDefault();
+      mapDialog.close();
+      var target = document.getElementById("contacto");
+      if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }
 })();
 
 /* Soy proveedor */
-(function () {
-  var d = document.getElementById("supplier-dialog");
-  if (!d) return;
-  var openBtn = document.querySelector("[data-open-supplier]");
-  var closeBtn = d.querySelector("[data-close-supplier]");
-  openBtn.addEventListener("click", function () {
-    d.showModal();
-    document.getElementById("s-empresa").focus();
-  });
-  closeBtn.addEventListener("click", function () { d.close(); });
-  d.addEventListener("click", function (e) { if (e.target === d) d.close(); });
-  d.addEventListener("close", function () { openBtn.focus({ preventScroll: true }); });
-})();
+setupDialog("supplier-dialog", "[data-open-supplier]", function () {
+  var f = document.getElementById("s-empresa");
+  if (f) f.focus();
+  closeNav();
+});
 
 /* Política de privacidad */
+setupDialog("privacy-dialog", "[data-open-privacy]");
+
+/* Menú en celulares */
+function closeNav() {
+  var nav = document.getElementById("site-nav");
+  var toggle = document.querySelector(".nav-toggle");
+  if (!nav || !toggle) return;
+  nav.classList.remove("is-open");
+  toggle.setAttribute("aria-expanded", "false");
+}
 (function () {
-  var d = document.getElementById("privacy-dialog");
-  if (!d) return;
-  var closeBtn = d.querySelector("[data-close-privacy]");
-  var lastTrigger = null;
-  document.querySelectorAll("[data-open-privacy]").forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      lastTrigger = btn;
-      d.showModal();
-      closeBtn.focus();
-    });
+  var nav = document.getElementById("site-nav");
+  var toggle = document.querySelector(".nav-toggle");
+  if (!nav || !toggle) return;
+  toggle.addEventListener("click", function () {
+    var open = nav.classList.toggle("is-open");
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
   });
-  closeBtn.addEventListener("click", function () { d.close(); });
-  d.addEventListener("click", function (e) { if (e.target === d) d.close(); });
-  d.addEventListener("close", function () {
-    if (lastTrigger) lastTrigger.focus({ preventScroll: true });
-  });
+  nav.querySelectorAll("a").forEach(function (a) { a.addEventListener("click", closeNav); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeNav(); });
 })();

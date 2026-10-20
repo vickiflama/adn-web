@@ -4,9 +4,25 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Alimentos del NEA — Distribuidora mayorista</title>
+    <title>Alimentos del NEA — Distribuidora mayorista en Reconquista, Santa Fe</title>
     <meta name="description"
-        content="Alimentos del NEA S.A. abastece a comercios, autoservicios y supermercados con marcas de confianza y entregas puntuales.">
+        content="Alimentos del NEA S.A. abastece a comercios, autoservicios y supermercados del norte santafesino con más de 300 marcas, reparto programado y un asesor que conoce tu negocio.">
+    <meta name="theme-color" content="#2e3093">
+
+    <!-- Vista previa al compartir el link (WhatsApp, Facebook, etc.) -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_AR">
+    <meta property="og:site_name" content="Alimentos del NEA">
+    <meta property="og:title" content="Alimentos del NEA — Distribuidora mayorista">
+    <meta property="og:description"
+        content="Más de 300 marcas, reparto programado y un asesor que conoce tu negocio. Distribuimos en el norte santafesino.">
+    <meta property="og:url" content="https://vickiflama.github.io/adn-web/">
+    <meta property="og:image" content="https://vickiflama.github.io/adn-web/img/og-cover.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="icon" type="image/png" href="img/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -19,34 +35,45 @@
 </head>
 
 <body>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
     <header class="container header">
         <a class="brand" href="#inicio" aria-label="Alimentos del NEA, inicio">
             <img class="brand__logo" src="img/adn.png" alt="ADN — Alimentos del NEA S.A. Distribuciones">
         </a>
-        <nav class="nav" aria-label="Principal">
-            <a href="#nosotros">Quiénes somos</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+            <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round">
+                <path d="M4 7h16M4 12h16M4 17h16" />
+            </svg>
+            <span class="visually-hidden">Abrir menú</span>
+        </button>
+        <nav id="site-nav" class="nav" aria-label="Principal">
             <a href="#marcas">Marcas</a>
             <a href="#clientes">Para tu negocio</a>
+            <a href="#nosotros">Quiénes somos</a>
             <button class="btn btn--ghost" type="button" data-open-supplier>Soy proveedor</button>
             <a class="btn btn--primary" href="#contacto">Quiero ser cliente</a>
         </nav>
     </header>
 
-    <main>
+    <main id="contenido">
         <!-- Hero -->
         <section id="inicio" class="container hero">
             <div class="hero__text">
-                <p class="eyebrow">Alimentos del NEA S.A. Distribuciones</p>
+                <p class="eyebrow">Distribuidora mayorista · Reconquista, Santa Fe</p>
                 <h1>Las marcas que tu góndola necesita, <span class="accent">en tu negocio.</span></h1>
-                <p class="hero__lead">Abastecemos a comercios, autoservicios y supermercados con productos de marcas de
-                    confianza, entregas puntuales y un trato directo con quienes conocen tu negocio.</p>
+                <p class="hero__lead">Abastecemos a comercios, autoservicios y supermercados con marcas reconocidas,
+                    reparto programado y un asesor que conoce tu negocio.</p>
                 <div class="hero__actions">
-                    <a class="btn btn--primary btn--lg" href="#contacto">Hacé tu primer pedido</a>
+                    <a class="btn btn--primary btn--lg" href="#contacto">Quiero ser cliente</a>
                     <a class="btn btn--ghost btn--lg" href="#marcas">Ver marcas</a>
                 </div>
+                <p class="hero__aside">¿Preferís hablar ya?
+                    <a href="https://wa.me/5493482707222?text=Hola%2C%20quiero%20ser%20cliente%20de%20ADN"
+                        target="_blank" rel="noopener">Escribinos por WhatsApp</a>
+                </p>
             </div>
-            <!-- Reemplazar por: <div class="hero__media"><img src="img/reparto.jpg" alt="Camión de reparto de ADN"></div> -->
             <div class="hero__media hero__media--photo">
                 <img src="img/deposito.jpg" alt="Depósito y playa de carga">
             </div>
@@ -63,7 +90,7 @@
                         </svg></span>
                     <div>
                         <div class="stat__value">18 años</div>
-                        <p class="stat__label">De trayectoria en el mercado</p>
+                        <p class="stat__label">de trayectoria en el mercado</p>
                     </div>
                 </div>
                 <div class="stat">
@@ -75,8 +102,8 @@
                             <path d="M16 4.7a3.5 3.5 0 010 6.6M18 14.8c1.9.7 3.2 2.4 3.5 5.2" />
                         </svg></span>
                     <div>
-                        <div class="stat__value">+ 1.200</div>
-                        <p class="stat__label">Clientes activos</p>
+                        <div class="stat__value">+1.200</div>
+                        <p class="stat__label">clientes activos</p>
                     </div>
                 </div>
                 <div class="stat">
@@ -87,8 +114,8 @@
                             <circle cx="12" cy="9.5" r="2.5" />
                         </svg></span>
                     <div>
-                        <div class="stat__value">+ 7</div>
-                        <p class="stat__label">Localidades con reparto</p>
+                        <div class="stat__value">+7</div>
+                        <p class="stat__label">localidades con reparto</p>
                     </div>
                 </div>
                 <div class="stat">
@@ -99,85 +126,17 @@
                             <path d="M4 7.2l8 4.3 8-4.3M12 11.5V21" />
                         </svg></span>
                     <div>
-                        <div class="stat__value">+ 300</div>
-                        <p class="stat__label">Marcas que distribuimos</p>
+                        <div class="stat__value">+300</div>
+                        <p class="stat__label">marcas que distribuimos</p>
                     </div>
                 </div>
             </div>
         </section>
 
-
-        <!-- Quienes somos -->
-        <section id="nosotros" class="container section">
-            <div class="about">
-                <div class="about__text">
-                    <p class="eyebrow">Quiénes somos</p>
-                    <h2 class="h2">Distribuimos confianza desde Reconquista.</h2>
-                    <p>Alimentos del NEA S.A. es una distribuidora con base en Reconquista, Santa Fe. Hace 18
-                        años abastecemos a comercios, autoservicios y supermercados del norte santafesino con las marcas
-                        que sus clientes eligen. [Completar: cómo empezó la empresa y quiénes la fundaron.]</p>
-                    <p>Distribuimos más de 300 marcas y además contamos con nuestra marca de Soda Forlin, una marca con tradición
-                        desde 1955. </p>
-                    <ul class="about__values">
-                        <li><strong>Cercanía</strong>Cada comercio tiene un vendedor asignado que lo conoce y lo acompaña.</li>
-                        <li><strong>Puntualidad</strong>Cumplimos los días de reparto acordados, porque sabemos que tu negocio no puede esperar.</li>
-                        <li><strong>Respaldo</strong>Más de 18 años de experiencia en el mercado respaldan cada pedido que entregamos.</li>
-                    </ul>
-                </div>
-                
-                <div class="about__media">[FOTO: equipo de ADN]</div>
-            </div>
-            <div class="pillars">
-  <article class="pillar">
-    <span class="stat__icon"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2e3093" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1" fill="#2e3093"/></svg></span>
-    <h3>Misión</h3>
-    <p>Abastecer a comercios, autoservicios y supermercados del norte santafesino con productos de calidad, entregas puntuales y un trato cercano, para que sus góndolas nunca se queden vacías.</p>
-  </article>
-  <article class="pillar">
-    <span class="stat__icon"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2e3093" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></span>
-    <h3>Visión</h3>
-    <p>Ser el distribuidor de referencia del NEA, reconocido por la confianza de sus clientes, el respaldo de sus marcas y su compromiso con la región.</p>
-  </article>
-  <article class="pillar">
-    <span class="stat__icon"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2e3093" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.2 8-8 9-4.8-1-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></span>
-    <h3>Valores</h3>
-    <ul class="pillar__tags">
-      <li>Cercanía</li>
-      <li>Compromiso</li>
-      <li>Confianza</li>
-      <li>Tradición</li>
-      <li>Trabajo en equipo</li>
-    </ul>
-  </article>
-</div>
-        </section>
-
-        <!-- Marca propia -->
+        <!-- Marcas -->
         <section id="marcas" class="container section">
-            <p class="eyebrow">Nuestra marca</p>
-            <h2 class="h2">Una marca propia, con la tradición de siempre.</h2>
-            <article class="brand-card">
-                <div class="brand-card__media"><img src="img/sodas-forlin.jpg"
-                        alt="Sodas Forlin de 1,5 litros en bolsones"></div>
-                <div class="brand-card__body">
-                    <div class="logo-slot"><img src="img/forlin.png" alt="Forlin — Tradición con fuerza, 1955"></div>
-                    <h3>Soda Forlin</h3>
-                    <p>Una marca de Alimentos del NEA. La soda que tus clientes ya reconocen, con el respaldo directo de
-                        quien la distribuye.</p>
-                    <a class="link-arrow" href="#contacto">Pedir lista de precios
-                        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M5 12h14M13 6l6 6-6 6" />
-                        </svg>
-                    </a>
-                </div>
-            </article>
-        </section>
-
-        <!-- Marcas que distribuimos -->
-        <section id="distribuimos" class="container section">
-            <p class="eyebrow">Marcas que distribuimos</p>
-            <h2 class="h2">Todo lo que tu góndola necesita, de un solo proveedor.</h2>
+            <p class="eyebrow">Marcas</p>
+            <h2 class="h2">Marcas reconocidas, un solo proveedor.</h2>
             <ul class="logo-grid">
                 <li class="logo-grid__item"><img src="img/molinos.png" alt="Molinos"></li>
                 <li class="logo-grid__item"><img src="img/chandon.png" alt="Chandon"></li>
@@ -188,6 +147,26 @@
                 <li class="logo-grid__item"><img src="img/felpita.png" alt="Felpita Papel Tissue"></li>
                 <li class="logo-grid__item logo-grid__item--more">Y muchas más</li>
             </ul>
+
+            <article class="brand-card">
+                <div class="brand-card__media"><img src="img/sodas-forlin.jpg"
+                        alt="Sodas Forlin de 1,5 litros en bolsones"></div>
+                <div class="brand-card__body">
+                    <span class="badge">Marca propia de ADN</span>
+                    <div class="logo-slot"><img src="img/forlin.png" alt="Forlin — Tradición con fuerza, 1955"></div>
+                    <h3>Soda Forlin</h3>
+                    <p>Una marca con tradición desde 1955. La soda que tus clientes ya reconocen, con el respaldo
+                        directo de quien la distribuye.</p>
+                    <a class="link-arrow"
+                        href="https://wa.me/5493482707222?text=Hola%2C%20quiero%20la%20lista%20de%20precios%20de%20Soda%20Forlin"
+                        target="_blank" rel="noopener">Pedir lista de precios
+                        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14M13 6l6 6-6 6" />
+                        </svg>
+                    </a>
+                </div>
+            </article>
         </section>
 
         <!-- Para tu negocio -->
@@ -203,11 +182,10 @@
                         <circle cx="17" cy="17.5" r="1.8" />
                     </svg>
                     <h3>Entregas puntuales</h3>
-                    <p>Reparto programado desde Reconquista para que nunca te falte mercadería en góndola. </p>
+                    <p>Reparto programado desde Reconquista para que nunca te falte mercadería en góndola.</p>
                     <button class="btn btn--ghost btn--sm" type="button" data-open-map>
                         <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            style="margin-right:8px">
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M12 21s7-6.2 7-11.5A7 7 0 005 9.5C5 14.8 12 21 12 21z" />
                             <circle cx="12" cy="9.5" r="2.5" />
                         </svg>
@@ -226,7 +204,7 @@
                     <a class="btn btn--ghost btn--sm"
                         href="https://wa.me/5493482707222?text=Hola%2C%20quiero%20que%20me%20asignen%20un%20vendedor%20para%20mi%20comercio"
                         target="_blank" rel="noopener">
-                        <img src="img/whatsapp.svg" alt="" width="18" height="18" style="margin-right:8px">
+                        <img src="img/whatsapp.svg" alt="" width="18" height="18">
                         Solicitar vendedor
                     </a>
                 </div>
@@ -238,20 +216,136 @@
                     </svg>
                     <h3>Precios mayoristas</h3>
                     <p>Condiciones pensadas para quien revende: promociones y descuentos por volumen.</p>
-                    <a class="btn btn--ghost btn--sm" href="#contacto">
-                        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            style="margin-right:8px">
-                            <path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z" />
-                            <path d="M14 3v5h5M9 13h6M9 17h6" />
-                        </svg>
-                        Quiero lista de precios
+                    <a class="btn btn--ghost btn--sm"
+                        href="https://wa.me/5493482707222?text=Hola%2C%20quiero%20recibir%20la%20lista%20de%20precios%20mayorista"
+                        target="_blank" rel="noopener">
+                        <img src="img/whatsapp.svg" alt="" width="18" height="18">
+                        Pedir lista de precios
                     </a>
                 </div>
             </div>
-            <p class="note">Trabajamos con comercios de barrio, autoservicios y supermercados.</p>
         </section>
 
+        <!-- Cómo ser cliente -->
+        <section id="como" class="container section">
+            <p class="eyebrow">Cómo ser cliente</p>
+            <h2 class="h2">Sumarte como cliente es muy simple.</h2>
+            <ol class="steps">
+                <li class="step">
+                    <span class="step__num" aria-hidden="true">1</span>
+                    <h3>Dejanos tus datos</h3>
+                    <p>Completá el formulario o escribinos por WhatsApp. Solo necesitamos los datos de tu comercio.</p>
+                </li>
+                <li class="step">
+                    <span class="step__num" aria-hidden="true">2</span>
+                    <h3>Te asignamos un asesor</h3>
+                    <p>Un vendedor se comunica con vos para conocer tu negocio y armar tu primer pedido.</p>
+                </li>
+                <li class="step">
+                    <span class="step__num" aria-hidden="true">3</span>
+                    <h3>Recibís tu pedido</h3>
+                    <p>Lo entregamos en el próximo reparto de tu zona.</p>
+                </li>
+            </ol>
+            <div class="steps__cta">
+                <a class="btn btn--primary btn--lg" href="#contacto">Quiero ser cliente</a>
+            </div>
+        </section>
+
+        <!-- Quiénes somos -->
+        <section id="nosotros" class="container section">
+            <div class="about">
+                <p class="eyebrow">Quiénes somos</p>
+                <h2 class="h2">Distribuimos confianza desde Reconquista.</h2>
+                <p>Alimentos del NEA S.A. es una distribuidora mayorista con base en Reconquista, Santa Fe. Hace 18
+                    años acompañamos a los comercios del norte santafesino con las marcas que sus clientes eligen.</p>
+                <p>Además de distribuir marcas líderes, somos los dueños de Soda Forlin, con tradición desde 1955.</p>
+            </div>
+            <div class="pillars">
+                <article class="pillar">
+                    <span class="stat__icon"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24"
+                            fill="none" stroke="#2e3093" stroke-width="1.7" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="9" />
+                            <circle cx="12" cy="12" r="4.5" />
+                            <circle cx="12" cy="12" r="1" fill="#2e3093" />
+                        </svg></span>
+                    <h3>Misión</h3>
+                    <p>Abastecer a comercios, autoservicios y supermercados del norte santafesino con productos de
+                        calidad, entregas puntuales y un trato cercano, para que sus góndolas nunca se queden vacías.
+                    </p>
+                </article>
+                <article class="pillar">
+                    <span class="stat__icon"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24"
+                            fill="none" stroke="#2e3093" stroke-width="1.7" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z" />
+                            <circle cx="12" cy="12" r="3" />
+                        </svg></span>
+                    <h3>Visión</h3>
+                    <p>Ser el distribuidor de referencia del NEA, reconocido por la confianza de sus clientes, el
+                        respaldo de sus marcas y su compromiso con la región.</p>
+                </article>
+                <article class="pillar">
+                    <span class="stat__icon"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24"
+                            fill="none" stroke="#2e3093" stroke-width="1.7" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path d="M12 3l8 3v6c0 4.5-3.2 8-8 9-4.8-1-8-4.5-8-9V6z" />
+                            <path d="M8.5 12l2.5 2.5 4.5-5" />
+                        </svg></span>
+                    <h3>Valores</h3>
+                    <ul class="pillar__tags">
+                        <li>Cercanía</li>
+                        <li>Compromiso</li>
+                        <li>Confianza</li>
+                        <li>Tradición</li>
+                        <li>Trabajo en equipo</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <!-- Preguntas frecuentes -->
+        <section id="preguntas" class="container section">
+            <p class="eyebrow">Preguntas frecuentes</p>
+            <h2 class="h2">Resolvé tus dudas antes de escribirnos.</h2>
+            <div class="faq">
+                <details class="faq__item">
+                    <summary>¿Cómo me hago cliente?</summary>
+                    <p>Completá el formulario de contacto o escribinos por WhatsApp. Un asesor se comunica con vos
+                        para conocer tu comercio y armar el primer pedido.</p>
+                </details>
+                <details class="faq__item">
+                    <summary>¿A qué zonas reparten?</summary>
+                    <p>Salimos desde Reconquista hacia Avellaneda, Villa Ocampo, Florencia, Vera, Calchaquí, Romang,
+                        Alejandra y localidades intermedias.
+                        <button class="link-btn link-btn--inline" type="button" data-open-map>Ver mapa de
+                            reparto</button>
+                    </p>
+                </details>
+                <details class="faq__item">
+                    <summary>¿Cómo pido la lista de precios?</summary>
+                    <p>Pedila por
+                        <a class="accent-link"
+                            href="https://wa.me/5493482707222?text=Hola%2C%20quiero%20recibir%20la%20lista%20de%20precios%20mayorista"
+                            target="_blank" rel="noopener">WhatsApp</a>
+                        o desde el formulario de contacto y te la enviamos.
+                    </p>
+                </details>
+                <details class="faq__item">
+                    <summary>¿Cuál es el horario de atención?</summary>
+                    <p>Lunes a viernes de 8 a 16 hs y sábados de 8 a 12 hs.</p>
+                </details>
+                <details class="faq__item">
+                    <summary>Tengo una marca, ¿cómo ofrezco mis productos?</summary>
+                    <p>Tocá
+                        <button class="link-btn link-btn--inline" type="button" data-open-supplier>Soy
+                            proveedor</button>
+                        y completá el formulario. El área comercial se pone en contacto.
+                    </p>
+                </details>
+            </div>
+        </section>
 
         <!-- Contacto -->
         <section id="contacto" class="container contact">
@@ -260,12 +354,27 @@
                 <h2 class="h2">Sumate como cliente.</h2>
                 <p>Contanos qué tipo de negocio tenés y un asesor se comunica con vos para armar tu primer pedido.</p>
                 <ul class="contact__list">
-                    <li>Teléfono: 3482- 707222</li>
-                    <li>Email: info@adelnea.com.ar</li>
-                    <li>Dirección: Bv. Lovatto N° 1313 - Reconquista, Santa Fe.</li>
-                    <li class="schedule">
-                        <span>Horario de atención:</span>
-                        <span>Lunes a Viernes de 8 a 16 hs.<br>Sábado de 8 a 12 hs.</span>
+                    <li>
+                        <span class="contact__label">Teléfono y WhatsApp</span>
+                        <span>3482 707222 ·
+                            <a class="accent-link" href="tel:+543482707222">Llamar</a> ·
+                            <a class="accent-link" href="https://wa.me/5493482707222" target="_blank"
+                                rel="noopener">Escribir</a></span>
+                    </li>
+                    <li>
+                        <span class="contact__label">Email</span>
+                        <a class="accent-link" href="mailto:info@adelnea.com.ar">info@adelnea.com.ar</a>
+                    </li>
+                    <li>
+                        <span class="contact__label">Dirección</span>
+                        <span>Bv. Lovatto N° 1313, Reconquista, Santa Fe ·
+                            <a class="accent-link"
+                                href="https://www.google.com/maps/search/?api=1&query=Bv.+Lovatto+1313+Reconquista+Santa+Fe"
+                                target="_blank" rel="noopener">Cómo llegar</a></span>
+                    </li>
+                    <li>
+                        <span class="contact__label">Horario de atención</span>
+                        <span>Lunes a viernes de 8 a 16 hs<br>Sábados de 8 a 12 hs</span>
                     </li>
                 </ul>
             </div>
@@ -289,11 +398,11 @@
                 </div>
                 <label class="consent">
                     <input type="checkbox" name="privacidad" required>
-                    <span>Acepto la <button class="link-btn link-btn--inline" type="button" data-open-privacy>política
-                            de privacidad</button></span>
+                    <span>Acepto la <button class="link-btn link-btn--inline" type="button"
+                            data-open-privacy>política de privacidad</button></span>
                 </label>
-
-                <button class="btn btn--primary btn--lg" type="submit">Enviar consulta</button>
+                <button class="btn btn--primary btn--lg" type="submit">Quiero ser cliente</button>
+                <p class="form__note">Te respondemos en nuestro horario de atención.</p>
             </form>
         </section>
     </main>
@@ -301,12 +410,24 @@
     <footer class="footer">
         <div class="container footer__inner">
             <span>© 2026 Alimentos del NEA S.A. · Todos los derechos reservados</span>
-            <span class="footer__social"><a href="https://www.instagram.com/alimentosdelnea_">Instagram</a>
-                <a href="https://www.facebook.com/profile.php?id=61587382507731">Facebook</a>
-                <a href="https://www.linkedin.com/company/alimentos-del-nea-sa">Linkedin</a></span>
-            <button class="link-btn link-btn--footer" type="button" data-open-privacy>Política de privacidad</button>
+            <span class="footer__social">
+                <a href="https://www.instagram.com/alimentosdelnea_" target="_blank" rel="noopener">Instagram</a>
+                <a href="https://www.facebook.com/profile.php?id=61587382507731" target="_blank"
+                    rel="noopener">Facebook</a>
+                <a href="https://www.linkedin.com/company/alimentos-del-nea-sa" target="_blank"
+                    rel="noopener">LinkedIn</a>
+                <button class="link-btn link-btn--footer" type="button" data-open-privacy>Política de
+                    privacidad</button>
+            </span>
         </div>
     </footer>
+
+    <!-- Botón flotante de WhatsApp -->
+    <a class="whatsapp-fab"
+        href="https://wa.me/5493482707222?text=Hola%2C%20quiero%20consultar%20por%20productos%20de%20ADN"
+        target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp">
+        <img class="whatsapp-fab__icon" src="img/whatsapp.svg" alt="" width="28" height="28">
+    </a>
 
     <!-- Ventana: zonas de reparto -->
     <dialog id="map-dialog" class="map-dialog" aria-labelledby="map-title">
@@ -315,7 +436,7 @@
                 <p class="eyebrow">Entregas puntuales</p>
                 <h2 id="map-title" class="map-dialog__title">Dónde repartimos</h2>
             </div>
-            <button class="map-dialog__close" type="button" data-close-map aria-label="Cerrar mapa">
+            <button class="map-dialog__close" type="button" data-close-dialog aria-label="Cerrar mapa">
                 <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                     stroke-width="2" stroke-linecap="round">
                     <path d="M6 6l12 12M18 6L6 18" />
@@ -345,22 +466,22 @@
                     <li class="towns__item towns__item--more"><span class="towns__dot"></span>Y localidades intermedias
                     </li>
                 </ul>
-                <p class="note">¿Tu localidad no está en la lista? <a class="accent" href="#contacto"
+                <p class="note">¿Tu localidad no está en la lista? <a class="accent-link" href="#contacto"
                         data-goto-contact>Consultanos</a>.</p>
             </div>
         </div>
     </dialog>
 
-
-
+    <!-- Ventana: proveedores -->
     <dialog id="supplier-dialog" class="map-dialog supplier-dialog" aria-labelledby="supplier-title">
         <div class="map-dialog__head">
             <div>
+                <p class="eyebrow">Para proveedores</p>
                 <h2 id="supplier-title" class="map-dialog__title">Sumá tu marca a ADN</h2>
                 <p class="supplier-dialog__lead">Si fabricás o representás una marca y querés que la distribuyamos,
                     contanos qué ofrecés y el área comercial se pone en contacto.</p>
             </div>
-            <button class="map-dialog__close" type="button" data-close-supplier
+            <button class="map-dialog__close" type="button" data-close-dialog
                 aria-label="Cerrar formulario de proveedores">
                 <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                     stroke-width="2" stroke-linecap="round">
@@ -411,27 +532,14 @@
         </form>
     </dialog>
 
-    <!-- Botón de Whatsapp -->
-
-    <a class="whatsapp-fab"
-        href="https://wa.me/5493482707222?text=Hola%2C%20quiero%20consultar%20por%20productos%20de%20ADN"
-        target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp">
-        <img class="whatsapp-fab__icon" src="img/whatsapp.svg" alt="" width="26" height="26">
-        <path d="M21 11.5a8.4 8.4 0 01-12.4 7.4L3 20.5l1.7-5.4A8.4 8.4 0 1121 11.5z" />
-        <path
-            d="M9.2 8.8c.3-.6.8-.6 1-.5.4.9.6 1.4.4 1.7l-.6.8c.5 1 1.3 1.8 2.3 2.3l.8-.6c.3-.2.8 0 1.7.4 0 .2.1.7-.5 1-.7.4-1.5.5-2.6 0a8 8 0 01-3.9-3.9c-.4-1-.2-1.8.4-2.6z"
-            fill="currentColor" stroke="none" /></svg>
-    </a>
-
-    <!-- Políticas de privacidad -->
-
+    <!-- Ventana: política de privacidad -->
     <dialog id="privacy-dialog" class="map-dialog" aria-labelledby="privacy-title">
         <div class="map-dialog__head">
             <div>
                 <p class="eyebrow">Tus datos</p>
                 <h2 id="privacy-title" class="map-dialog__title">Política de privacidad</h2>
             </div>
-            <button class="map-dialog__close" type="button" data-close-privacy
+            <button class="map-dialog__close" type="button" data-close-dialog
                 aria-label="Cerrar política de privacidad">
                 <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                     stroke-width="2" stroke-linecap="round">
