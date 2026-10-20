@@ -1,0 +1,81 @@
+/* Alimentos del NEA — mapa de zonas de reparto (Leaflet + OpenStreetMap) */
+(function () {
+  var dialog = document.getElementById("map-dialog");
+  if (!dialog) return;
+
+  var openBtn = document.querySelector("[data-open-map]");
+  var closeBtn = dialog.querySelector("[data-close-map]");
+  var mapEl = document.getElementById("delivery-map");
+  var fallback = document.getElementById("map-fallback");
+  var map = null;
+
+  // Punto de partida y destinos (coordenadas aproximadas, provincia de Santa Fe)
+  var ORIGIN = { name: "Reconquista", sub: "Punto de partida", lat: -29.1436, lng: -59.6431, tip: "right" };
+  var STOPS = [
+    { name: "Avellaneda",   lat: -29.1167, lng: -59.65,   tip: "left" },
+    { name: "Villa Ocampo", lat: -28.4833, lng: -59.3667, tip: "right" },
+    { name: "Florencia",    lat: -28.0333, lng: -59.2,    tip: "right" },
+    { name: "Vera",         lat: -29.4667, lng: -60.2167, tip: "left" },
+    { name: "Calchaquí",    lat: -29.8914, lng: -60.2989, tip: "left" }
+  ];
+
+  function pinIcon(isOrigin) {
+    var size = isOrigin ? 44 : 32;
+    var inner = isOrigin
+      ? '<path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round" transform="translate(7 6) scale(.78)"/>'
+      : '<circle cx="16" cy="14" r="4.5" fill="#fff"/>';
+    var vb = isOrigin ? "0 0 44 44" : "0 0 32 32";
+    var shape = isOrigin
+      ? '<circle cx="22" cy="22" r="20" fill="#2e3093" stroke="#fff" stroke-width="3"/>'
+      : '<path d="M16 30s10-8.6 10-16A10 10 0 006 14c0 7.4 10 16 10 16z" fill="#2e3093" stroke="#fff" stroke-width="2"/>';
+    return L.divIcon({
+      className: "map-pin",
+      html: '<svg width="' + size + '" height="' + size + '" viewBox="' + vb + '" aria-hidden="true">' + shape + inner + "</svg>",
+      iconSize: [size, size],
+      iconAnchor: isOrigin ? [size / 2, size / 2] : [size / 2, size - 2]
+    });
+  }
+
+  function initMap() {
+    if (map) { map.invalidateSize(); return; }
+    if (typeof L === "undefined") {
+      mapEl.hidden = true;
+      fallback.hidden = false;
+      return;
+    }
+    map = L.map(mapEl, { scrollWheelZoom: false });
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 18,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+    var bounds = [[ORIGIN.lat, ORIGIN.lng]];
+
+    STOPS.forEach(function (s) {
+      L.polyline([[ORIGIN.lat, ORIGIN.lng], [s.lat, s.lng]], {
+        color: "#2e3093", weight: 3, opacity: 0.7, dashArray: "8 8"
+      }).addTo(map);
+      L.marker([s.lat, s.lng], { icon: pinIcon(false), title: s.name, keyboard: false })
+        .addTo(map)
+        .bindTooltip(s.name, { permanent: true, direction: s.tip, offset: [s.tip === "left" ? -8 : 8, -14], className: "map-label" });
+      bounds.push([s.lat, s.lng]);
+    });
+
+    L.marker([ORIGIN.lat, ORIGIN.lng], { icon: pinIcon(true), title: ORIGIN.name, zIndexOffset: 1000, keyboard: false })
+      .addTo(map)
+      .bindTooltip(ORIGIN.name + " · " + ORIGIN.sub, { permanent: true, direction: ORIGIN.tip, offset: [18, 0], className: "map-label map-label--origin" });
+
+    map.fitBounds(bounds, { padding: [48, 48] });
+  }
+
+  openBtn.addEventListener("click", function () {
+    dialog.showModal();
+    initMap();
+    closeBtn.focus();
+  });
+  closeBtn.addEventListener("click", function () { dialog.close(); });
+  dialog.addEventListener("click", function (e) {
+    if (e.target === dialog) dialog.close(); // clic en el fondo oscuro
+  });
+  dialog.addEventListener("close", function () { openBtn.focus(); });
+})();
