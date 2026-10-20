@@ -224,6 +224,51 @@ ul { padding: 0; list-style: none; }
 .footer__social { display: flex; gap: 24px; }
 .footer__social a:hover { color: var(--blue); }
 
+/* Botón chico */
+.btn--sm { min-height: 40px; padding: 0 18px; font-size: 15px; align-self: flex-start; margin-top: 6px; }
+
+/* Ventana del mapa */
+body:has(dialog[open]) { overflow: hidden; }
+.map-dialog {
+  width: min(960px, calc(100% - 32px)); max-height: calc(100% - 32px);
+  padding: 0; border: 0; border-radius: 24px; background: var(--white); color: var(--ink);
+  overflow: auto;
+}
+.map-dialog::backdrop { background: rgba(17, 17, 17, 0.55); }
+.map-dialog__head {
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 16px;
+  padding: 28px 32px 20px;
+}
+.map-dialog__head .eyebrow { margin-bottom: 6px; }
+.map-dialog__title { font-family: var(--font-display); font-weight: 700; font-size: 32px; line-height: 1.1; letter-spacing: -0.015em; }
+.map-dialog__close {
+  display: flex; align-items: center; justify-content: center; flex: none;
+  width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line);
+  background: var(--white); color: var(--ink); cursor: pointer;
+}
+.map-dialog__close:hover { border-color: var(--blue); color: var(--blue); }
+.map-dialog__body { display: flex; flex-wrap: wrap; gap: 24px; padding: 0 32px 32px; }
+.map-dialog__map { flex: 2 1 460px; min-width: 0; }
+#delivery-map { height: 440px; border-radius: 16px; border: 1px solid var(--line); background: var(--surface); }
+.map-dialog__list { flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 16px; }
+.map-dialog__lead { color: var(--text); }
+.towns { display: flex; flex-direction: column; gap: 10px; }
+.towns__item { display: flex; align-items: center; gap: 12px; font-weight: 500; }
+.towns__item small { color: var(--muted); font-weight: 400; font-size: 14px; }
+.towns__dot { flex: none; width: 12px; height: 12px; border-radius: 50%; background: var(--blue); }
+.towns__item--origin .towns__dot { width: 16px; height: 16px; box-shadow: 0 0 0 4px rgba(46, 48, 147, 0.2); }
+.towns__item--more { color: var(--muted); font-weight: 400; }
+.towns__item--more .towns__dot { background: transparent; border: 2px solid var(--blue); }
+
+/* Pines y etiquetas del mapa (Leaflet) */
+.map-pin { background: none; border: 0; }
+.map-label {
+  padding: 4px 10px; border: 0; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  font-family: var(--font-body); font-weight: 600; font-size: 13px; color: var(--ink);
+}
+.map-label--origin { background: var(--blue); color: var(--white); }
+.map-label--origin::before, .map-label::before { display: none; }
+
 /* Mobile */
 @media (max-width: 720px) {
   .container { padding-inline: 20px; }
@@ -231,6 +276,10 @@ ul { padding: 0; list-style: none; }
   .section { padding-top: 72px; }
   .raffle { padding: 32px 24px; }
   .contact { padding-block: 72px; gap: 40px; }
-  .form, .brand-card { padding: 24px; }
+  .form { padding: 24px; }
+  .brand-card__body { padding: 28px; }
+  .map-dialog__head { padding: 20px 20px 16px; }
+  .map-dialog__body { padding: 0 20px 24px; }
+  #delivery-map { height: 340px; }
   .benefit, .benefit:first-child, .benefit:last-child { padding: 28px 0; }
 }
