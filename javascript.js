@@ -134,3 +134,83 @@ function closeNav() {
   nav.querySelectorAll("a").forEach(function (a) { a.addEventListener("click", closeNav); });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeNav(); });
 })();
+
+/* Animaciones al scrollear */
+(function () {
+  if (!("IntersectionObserver" in window)) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  var groups = [
+    ".hero__text > *", ".hero__media",
+    ".stat", "section .eyebrow", "section .h2",
+    ".logo-grid__item", ".brand-card", ".benefit", ".step", ".steps__cta",
+    ".about > p", ".pillar", ".faq__item", ".contact__info > *:not(.eyebrow):not(.h2)", ".form"
+  ];
+  var items = [];
+  groups.forEach(function (sel) {
+    document.querySelectorAll(sel).forEach(function (el) {
+      if (el.closest("dialog") || el.classList.contains("reveal")) return;
+      // escalonar hermanos de una misma fila
+      var idx = el.parentElement ? Array.prototype.indexOf.call(el.parentElement.children, el) : 0;
+      el.style.setProperty("--d", Math.min(idx, 5) * 90 + "ms");
+      el.classList.add("reveal");
+      items.push(el);
+    });
+  });
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      e.target.classList.add("is-visible");
+      io.unobserve(e.target);
+    });
+  }, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
+
+  items.forEach(function (el) { io.observe(el); });
+})();
+
+/* Preguntas frecuentes: apertura y cierre suaves */
+(function () {
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce || !Element.prototype.animate) return;
+  var EASE = "cubic-bezier(0.2, 0.7, 0.2, 1)";
+
+  document.querySelectorAll(".faq__item").forEach(function (d) {
+    var s = d.querySelector("summary");
+    var body = d.querySelector("p");
+    var anim = null, fade = null;
+
+    function run(from, to, opening) {
+      if (anim) anim.cancel();
+      if (fade) fade.cancel();
+      d.style.overflow = "hidden";
+      anim = d.animate({ height: [from + "px", to + "px"] }, { duration: 380, easing: EASE });
+      fade = body.animate(
+        { opacity: opening ? [0, 1] : [1, 0], transform: opening ? ["translateY(-6px)", "none"] : ["none", "translateY(-6px)"] },
+        { duration: opening ? 380 : 220, easing: "ease", fill: "none" }
+      );
+      anim.onfinish = function () {
+        if (!opening) d.open = false;
+        anim = null; d.style.overflow = "";
+      };
+      anim.oncancel = function () { d.style.overflow = ""; };
+    }
+
+    s.addEventListener("click", function (e) {
+      e.preventDefault();
+      var border = d.offsetHeight - d.clientHeight;
+      var closedH = s.offsetHeight + border;
+      if (!d.open || (anim && d.classList.contains("is-closing"))) {
+        d.classList.remove("is-closing");
+        var startH = d.offsetHeight;
+        d.open = true;
+        run(startH, d.scrollHeight + border, true);
+      } else {
+        d.classList.add("is-closing");
+        var cur = d.offsetHeight;
+        run(cur, closedH, false);
+        anim.addEventListener("finish", function () { d.classList.remove("is-closing"); });
+      }
+    });
+  });
+})();

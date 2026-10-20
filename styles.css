@@ -118,8 +118,6 @@ ul, ol { padding: 0; list-style: none; }
 }
 .hero__lead { margin-top: 26px; max-width: 560px; font-size: 19px; color: var(--text); }
 .hero__actions { margin-top: 34px; display: flex; flex-wrap: wrap; gap: 14px; }
-.hero__aside { margin-top: 22px; font-size: 15px; color: var(--muted); }
-.hero__aside a { color: var(--blue); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
 .hero__media {
   flex: 1 1 380px; min-width: 0; width: 100%;
   aspect-ratio: 4 / 5; max-height: 560px;
@@ -251,7 +249,9 @@ ul, ol { padding: 0; list-style: none; }
   content: "+"; flex: none; font-family: var(--font-body); font-weight: 400; font-size: 28px; color: var(--blue);
   transition: transform 0.15s ease;
 }
-.faq__item[open] summary::after { content: "–"; }
+.faq__item[open] summary::after { transform: rotate(45deg); }
+.faq__item { overflow: hidden; }
+@media (prefers-reduced-motion: reduce) { .faq__item summary::after { transition: none; } }
 .faq__item summary:hover { color: var(--blue); }
 .faq__item p { padding: 0 0 22px; max-width: 680px; color: var(--text); }
 
@@ -383,6 +383,28 @@ body:has(dialog[open]) { overflow: hidden; }
 }
 .whatsapp-fab__icon { display: block; filter: brightness(0) invert(1); }
 .whatsapp-fab:hover { background: #0c6a37; transform: translateY(-2px); }
+
+/* Movimiento al scrollear (solo si hay JS y el usuario no pidió reducir animaciones) */
+@media (prefers-reduced-motion: no-preference) {
+  .js .reveal {
+    opacity: 0; transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+    transition-delay: var(--d, 0ms);
+  }
+  .js .reveal.is-visible { opacity: 1; transform: none; }
+
+  .stat, .benefit, .step, .pillar, .logo-grid__item, .brand-card {
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, opacity 0.7s ease;
+  }
+  .js .reveal.is-visible.stat:hover, .js .reveal.is-visible.benefit:hover,
+  .js .reveal.is-visible.step:hover, .js .reveal.is-visible.pillar:hover,
+  .js .reveal.is-visible.logo-grid__item:hover {
+    transform: translateY(-6px); box-shadow: 0 14px 32px rgba(46, 48, 147, 0.12);
+    transition-delay: 0ms;
+  }
+  .hero__media img { transition: transform 0.8s ease; }
+  .hero__media:hover img { transform: scale(1.04); }
+}
 
 /* Tablet / mobile */
 @media (max-width: 900px) {
