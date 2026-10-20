@@ -90,3 +90,31 @@ if (contactLink) {
   });
 }
 })();
+
+
+/* Bases y condiciones del sorteo */
+(function () {
+  var d = document.getElementById("terms-dialog");
+  if (!d) return;
+  var openBtn = document.querySelector("[data-open-terms]");
+  var closeBtn = d.querySelector("[data-close-terms]");
+  openBtn.addEventListener("click", function () { d.showModal(); closeBtn.focus(); });
+  closeBtn.addEventListener("click", function () { d.close(); });
+  d.addEventListener("click", function (e) { if (e.target === d) d.close(); });
+  d.addEventListener("close", function () { openBtn.focus({ preventScroll: true }); });
+})();
+
+/* Soy proveedor */
+(function () {
+  var d = document.getElementById("supplier-dialog");
+  if (!d) return;
+  var openBtn = document.querySelector("[data-open-supplier]");
+  var closeBtn = d.querySelector("[data-close-supplier]");
+  openBtn.addEventListener("click", function () {
+    d.showModal();
+    document.getElementById("s-empresa").focus();
+  });
+  closeBtn.addEventListener("click", function () { d.close(); });
+  d.addEventListener("click", function (e) { if (e.target === d) d.close(); });
+  d.addEventListener("close", function () { openBtn.focus({ preventScroll: true }); });
+})();
