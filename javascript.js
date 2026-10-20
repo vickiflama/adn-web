@@ -12,12 +12,14 @@
   // Punto de partida y destinos (coordenadas aproximadas, provincia de Santa Fe)
   var ORIGIN = { name: "Reconquista", sub: "Punto de partida", lat: -29.1436, lng: -59.6431, tip: "right" };
   var STOPS = [
-    { name: "Avellaneda",   lat: -29.1167, lng: -59.65,   tip: "left" },
-    { name: "Villa Ocampo", lat: -28.4833, lng: -59.3667, tip: "right" },
-    { name: "Florencia",    lat: -28.0333, lng: -59.2,    tip: "right" },
-    { name: "Vera",         lat: -29.4667, lng: -60.2167, tip: "left" },
-    { name: "Calchaquí",    lat: -29.8914, lng: -60.2989, tip: "left" }
-  ];
+  { name: "Avellaneda",   lat: -29.1167, lng: -59.65,   tip: "left" },
+  { name: "Villa Ocampo", lat: -28.4833, lng: -59.3667, tip: "right" },
+  { name: "Florencia",    lat: -28.0333, lng: -59.2,    tip: "right" },
+  { name: "Vera",         lat: -29.4667, lng: -60.2167, tip: "left" },
+  { name: "Calchaquí",    lat: -29.8914, lng: -60.2989, tip: "left" },
+  { name: "Romang",       lat: -29.5,    lng: -59.77,   tip: "right", chain: true },
+  { name: "Alejandra",    lat: -29.75,   lng: -59.85,   tip: "right", chain: true }
+];
 
   function pinIcon(isOrigin) {
     var size = isOrigin ? 44 : 32;
@@ -52,14 +54,21 @@
     var bounds = [[ORIGIN.lat, ORIGIN.lng]];
 
     STOPS.forEach(function (s) {
-      L.polyline([[ORIGIN.lat, ORIGIN.lng], [s.lat, s.lng]], {
-        color: "#2e3093", weight: 3, opacity: 0.7, dashArray: "8 8"
-      }).addTo(map);
+      if (!s.chain) {
+        L.polyline([[ORIGIN.lat, ORIGIN.lng], [s.lat, s.lng]], {
+          color: "#2e3093", weight: 3, opacity: 0.7, dashArray: "8 8"
+        }).addTo(map);
+      }
       L.marker([s.lat, s.lng], { icon: pinIcon(false), title: s.name, keyboard: false })
         .addTo(map)
         .bindTooltip(s.name, { permanent: true, direction: s.tip, offset: [s.tip === "left" ? -8 : 8, -14], className: "map-label" });
       bounds.push([s.lat, s.lng]);
     });
+
+    // Ruta Provincial 1: Reconquista → Romang → Alejandra
+    L.polyline([[ORIGIN.lat, ORIGIN.lng], [-29.5, -59.77], [-29.75, -59.85]], {
+      color: "#2e3093", weight: 3, opacity: 0.7, dashArray: "8 8"
+    }).addTo(map);
 
     L.marker([ORIGIN.lat, ORIGIN.lng], { icon: pinIcon(true), title: ORIGIN.name, zIndexOffset: 1000, keyboard: false })
       .addTo(map)
