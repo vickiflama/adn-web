@@ -224,18 +224,52 @@ function closeNav() {
     var status = form.querySelector(".form__status");
     var btn = form.querySelector('button[type="submit"]');
     var label = btn.textContent;
+    var isSupplier = form.getAttribute("data-form") === "proveedor";
 
-    function show(ok, html) {
+    function showError(html) {
+      form.classList.remove("is-sent");
       status.hidden = false;
-      status.className = "form__status " + (ok ? "is-ok" : "is-error");
+      status.className = "form__status is-error";
       status.innerHTML = html;
+      status.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
+    function showSuccess() {
+      form.classList.add("is-sent");
+      status.hidden = false;
+      status.className = "form__status is-ok";
+      status.innerHTML =
+        '<span class="form__check" aria-hidden="true">' +
+        '<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>' +
+        "<strong>¡Mensaje enviado!</strong>" +
+        "<span>" + (isSupplier
+          ? "Recibimos tu propuesta. El área comercial se pone en contacto con vos."
+          : "Recibimos tus datos. Un asesor se comunica con vos en nuestro horario de atención.") + "</span>" +
+        '<span class="form__sent-actions">' +
+        (isSupplier ? '<button class="btn btn--primary btn--sm" type="button" data-sent-close>Cerrar</button>' : "") +
+        '<button class="btn btn--ghost btn--sm" type="button" data-sent-reset>Enviar otro mensaje</button></span>';
+      status.querySelector("[data-sent-reset]").addEventListener("click", function () {
+        form.classList.remove("is-sent");
+        status.hidden = true;
+        var first = form.querySelector("input:not([type=checkbox]), textarea");
+        if (first) first.focus();
+      });
+      var closeBtn = status.querySelector("[data-sent-close]");
+      if (closeBtn) closeBtn.addEventListener("click", function () {
+        var d = form.closest("dialog");
+        if (d) d.close();
+      });
+      // llevar el cartel al centro de la pantalla (y arriba de todo dentro de la ventana)
+      var dlg = form.closest("dialog");
+      if (dlg) dlg.scrollTop = 0;
+      status.scrollIntoView({ behavior: "smooth", block: "center" });
     }
 
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       var key = form.getAttribute("data-access-key");
       if (!key || key.indexOf("PEGAR_") === 0) {
-        show(false, 'Este formulario todavía no está conectado. Escribinos por <a href="' + WA + '" target="_blank" rel="noopener">WhatsApp</a>.');
+        showError('Este formulario todavía no está conectado. Escribinos por <a href="' + WA + '" target="_blank" rel="noopener">WhatsApp</a>.');
         return;
       }
       var data = new FormData(form);
@@ -250,12 +284,10 @@ function closeNav() {
         .then(function (j) {
           if (!j.success) throw new Error(j.message || "error");
           form.reset();
-          show(true, form.getAttribute("data-form") === "proveedor"
-            ? "¡Gracias! Recibimos tu propuesta y el área comercial se pone en contacto."
-            : "¡Gracias! Recibimos tus datos y un asesor se comunica con vos.");
+          showSuccess();
         })
         .catch(function () {
-          show(false, 'No pudimos enviar el formulario. Probá de nuevo o escribinos por <a href="' + WA + '" target="_blank" rel="noopener">WhatsApp</a>.');
+          showError('No pudimos enviar el formulario. Probá de nuevo o escribinos por <a href="' + WA + '" target="_blank" rel="noopener">WhatsApp</a>.');
         })
         .finally(function () { btn.disabled = false; btn.textContent = label; });
     });
