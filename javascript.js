@@ -214,3 +214,50 @@ function closeNav() {
     });
   });
 })();
+
+/* Envío de formularios (Web3Forms) */
+(function () {
+  var ENDPOINT = "https://api.web3forms.com/submit";
+  var WA = "https://wa.me/5493482707222";
+
+  document.querySelectorAll("form[data-form]").forEach(function (form) {
+    var status = form.querySelector(".form__status");
+    var btn = form.querySelector('button[type="submit"]');
+    var label = btn.textContent;
+
+    function show(ok, html) {
+      status.hidden = false;
+      status.className = "form__status " + (ok ? "is-ok" : "is-error");
+      status.innerHTML = html;
+    }
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var key = form.getAttribute("data-access-key");
+      if (!key || key.indexOf("PEGAR_") === 0) {
+        show(false, 'Este formulario todavía no está conectado. Escribinos por <a href="' + WA + '" target="_blank" rel="noopener">WhatsApp</a>.');
+        return;
+      }
+      var data = new FormData(form);
+      data.append("access_key", key);
+      data.append("subject", form.getAttribute("data-subject") || "Mensaje desde la web de ADN");
+      data.append("from_name", "Web ADN");
+
+      btn.disabled = true; btn.textContent = "Enviando…"; status.hidden = true;
+
+      fetch(ENDPOINT, { method: "POST", headers: { Accept: "application/json" }, body: data })
+        .then(function (r) { return r.json(); })
+        .then(function (j) {
+          if (!j.success) throw new Error(j.message || "error");
+          form.reset();
+          show(true, form.getAttribute("data-form") === "proveedor"
+            ? "¡Gracias! Recibimos tu propuesta y el área comercial se pone en contacto."
+            : "¡Gracias! Recibimos tus datos y un asesor se comunica con vos.");
+        })
+        .catch(function () {
+          show(false, 'No pudimos enviar el formulario. Probá de nuevo o escribinos por <a href="' + WA + '" target="_blank" rel="noopener">WhatsApp</a>.');
+        })
+        .finally(function () { btn.disabled = false; btn.textContent = label; });
+    });
+  });
+})();

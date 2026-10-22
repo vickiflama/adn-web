@@ -372,8 +372,10 @@
                     </li>
                 </ul>
             </div>
-            <!-- Conectar action a tu backend / Formspree / Apps Script -->
-            <form class="form" action="#" method="post">
+            <!-- Envío por Web3Forms: la clave va en data-access-key -->
+            <form class="form" method="post" data-form="cliente" data-access-key="9be16ce8-3ac6-45a9-88aa-0723df04cca8"
+                data-subject="Nuevo cliente desde la web de ADN">
+                <input class="visually-hidden" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">
                 <div class="field">
                     <label for="f-nombre">Nombre y apellido</label>
                     <input id="f-nombre" name="nombre" type="text" autocomplete="name" required>
@@ -396,6 +398,7 @@
                             data-open-privacy>política de privacidad</button></span>
                 </label>
                 <button class="btn btn--primary btn--lg" type="submit">Quiero ser cliente</button>
+                <p class="form__status" role="status" aria-live="polite" hidden></p>
                 <p class="form__note">Te respondemos en nuestro horario de atención.</p>
             </form>
         </section>
@@ -484,8 +487,9 @@
             </button>
         </div>
 
-        <!-- Conectar action al mail o planilla del área comercial -->
-        <form class="supplier-form" action="#" method="post">
+        <form class="supplier-form" method="post" data-form="proveedor" data-access-key="9be16ce8-3ac6-45a9-88aa-0723df04cca8"
+            data-subject="Nueva propuesta de proveedor desde la web de ADN">
+                <input class="visually-hidden" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">
             <div class="form-row">
                 <div class="field"><label for="s-empresa">Empresa o marca</label><input id="s-empresa" name="empresa"
                         type="text" required></div>
@@ -523,6 +527,7 @@
             </label>
 
             <button class="btn btn--primary btn--lg" type="submit">Enviar propuesta</button>
+            <p class="form__status" role="status" aria-live="polite" hidden></p>
         </form>
     </dialog>
 
@@ -571,7 +576,7 @@
             </li>
             <li>
                 <h3>Servicios de terceros</h3>
-                <p>Este sitio utiliza mapas de OpenStreetMap, tipografías de Google Fonts y enlaces a WhatsApp. Esos
+                <p>Este sitio utiliza mapas de OpenStreetMap, tipografías de Google Fonts, enlaces a WhatsApp y el servicio Web3Forms para enviarnos los formularios. Esos
                     servicios pueden recibir tu dirección IP cuando cargás la página o los usás.</p>
             </li>
             <li>
