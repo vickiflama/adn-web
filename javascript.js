@@ -93,17 +93,20 @@ function setupDialog(id, triggerSelector, onOpen) {
 
   var mapDialog = setupDialog("map-dialog", "[data-open-map]", function () { initMap(); });
 
-  // "Consultanos": cerrar el mapa y bajar a Contacto
-  var contactLink = document.querySelector("[data-goto-contact]");
-  if (contactLink && mapDialog) {
-    contactLink.addEventListener("click", function (e) {
+  // "Consultanos": cerrar la ventana donde esté y bajar a Contacto
+  document.querySelectorAll("[data-goto-contact]").forEach(function (link) {
+    link.addEventListener("click", function (e) {
       e.preventDefault();
-      mapDialog.close();
+      var d = link.closest("dialog");
+      if (d) d.close();
       var target = document.getElementById("contacto");
       if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
     });
-  }
+  });
 })();
+
+/* Más marcas */
+setupDialog("brands-dialog", "[data-open-brands]");
 
 /* Soy proveedor */
 setupDialog("supplier-dialog", "[data-open-supplier]", function () {
