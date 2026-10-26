@@ -317,19 +317,44 @@ function closeNav() {
     hideWidgetTitle();
   }
 
-  // El widget trae un título en inglés ("Latest Updates"): lo ocultamos apenas aparece
+  // El widget trae un título en inglés ("Latest Updates") y un botón "Follow":
+  // los ocultamos (ya tenemos nuestro propio botón de Instagram arriba).
   function hideWidgetTitle() {
-    var re = /^\s*latest updates\s*$/i;
+    var titleRe = /^\s*latest updates\s*$/i;
+    var rowRe = /^\s*(latest updates)?\s*(follow)?\s*$/i;
+    function clean(t) { return (t || "").replace(/\s+/g, " ").trim(); }
+    function sweepRoot(root) {
+      var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+      var node;
+      while ((node = walker.nextNode())) {
+        if (!titleRe.test(node.nodeValue)) continue;
+        var el = node.parentElement;
+        if (!el) continue;
+        // subimos mientras el contenedor tenga solo el título y/o el botón Follow
+        while (el.parentElement && el.parentElement !== feed &&
+               el.parentElement.getRootNode() === el.getRootNode() &&
+               rowRe.test(clean(el.parentElement.textContent))) {
+          el = el.parentElement;
+        }
+        el.style.setProperty("display", "none", "important");
+      }
+    }
     function sweep() {
+      sweepRoot(feed);
       feed.querySelectorAll("*").forEach(function (el) {
-        if (!el.children.length && re.test(el.textContent)) el.style.display = "none";
+        if (el.shadowRoot) sweepRoot(el.shadowRoot);
       });
     }
+    var queued = false;
+    function schedule() {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(function () { queued = false; sweep(); });
+    }
     sweep();
-    if (!("MutationObserver" in window)) return;
-    var mo = new MutationObserver(sweep);
-    mo.observe(feed, { childList: true, subtree: true, characterData: true });
-    setTimeout(function () { mo.disconnect(); }, 30000);
+    if ("MutationObserver" in window) {
+      new MutationObserver(schedule).observe(feed, { childList: true, subtree: true, characterData: true });
+    }
   }
 
   if (!("IntersectionObserver" in window)) { load(); return; }
