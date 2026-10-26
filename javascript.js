@@ -339,6 +339,15 @@ function closeNav() {
   io.observe(section);
 })();
 
+/* Clip del hero: solo si el visitante no pidió menos movimiento */
+(() => {
+  const loop = document.getElementById("hero-loop");
+  if (!loop) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { loop.removeAttribute("loop"); return; }
+  const io = new IntersectionObserver((es) => es.forEach((e) => { e.isIntersecting ? loop.play().catch(() => {}) : loop.pause(); }));
+  io.observe(loop);
+})();
+
 /* Video institucional: se descarga recién al tocar play */
 (() => {
   const box = document.querySelector("[data-video]");

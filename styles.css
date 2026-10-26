@@ -124,8 +124,16 @@ ul, ol { padding: 0; list-style: none; }
   background: var(--surface); border-radius: 8px; overflow: hidden;
 }
 .hero__media img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.hero__media--video { flex: 1 1 480px; aspect-ratio: 16 / 9; max-height: none; position: relative; background: #0d0f1a; }
-.hero__media--video video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.hero__side { flex: 1 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 14px; }
+.hero__media--loop { flex: none; aspect-ratio: 16 / 9; max-height: none; background: #0d0f1a; }
+.hero__media--loop video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.hero__video-link { align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; font-weight: 600; color: var(--blue, #2e3192); }
+.hero__video-link:hover { text-decoration: underline; }
+.about-wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 40px 56px; }
+.about-wrap .about { flex: 1 1 380px; }
+.about__video { flex: 1 1 460px; min-width: 0; scroll-margin-top: 24px; }
+.video-card { position: relative; aspect-ratio: 16 / 9; border-radius: 8px; overflow: hidden; background: #0d0f1a; }
+.video-card video { display: block; width: 100%; height: 100%; object-fit: cover; }
 .video-play {
   position: absolute; inset: 0; width: 100%; display: flex; flex-direction: column;
   align-items: center; justify-content: center; gap: 14px; cursor: pointer;
@@ -140,7 +148,7 @@ ul, ol { padding: 0; list-style: none; }
 .video-play:hover .video-play__icon, .video-play:focus-visible .video-play__icon { transform: scale(1.08); box-shadow: 0 0 0 14px rgba(255,255,255,0.32); }
 .video-play:focus-visible { outline: 3px solid #fff; outline-offset: -6px; }
 .video-play__label { font-weight: 600; font-size: 17px; text-shadow: 0 1px 8px rgba(0,0,0,0.5); }
-.hero__media--video.is-playing .video-play { opacity: 0; pointer-events: none; }
+.video-card.is-playing .video-play { opacity: 0; pointer-events: none; }
 
 /* Cifras */
 .stats { display: flex; flex-wrap: wrap; gap: 20px; }
@@ -525,7 +533,6 @@ body:has(dialog[open]) { overflow: hidden; }
   .brand__logo { height: 64px; }
   .hero { padding-block: 24px 64px; gap: 36px; }
   .hero__media { aspect-ratio: 4 / 3; }
-  .hero__media--video { aspect-ratio: 16 / 9; }
   .video-play__icon { width: 60px; height: 60px; }
   .video-play__label { font-size: 15px; }
   .hero__actions .btn { flex: 1 1 100%; }
