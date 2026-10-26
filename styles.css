@@ -99,7 +99,7 @@ ul, ol { padding: 0; list-style: none; }
   gap: 16px; padding-block: 28px 20px;
 }
 .brand { display: flex; align-items: center; }
-.brand__logo { display: block; height: 60px; width: auto; }
+.brand__logo { display: block; height: 88px; width: auto; }
 .nav { display: flex; align-items: center; gap: 8px 28px; font-weight: 500; font-size: 16px; }
 .nav a:not(.btn):hover { color: var(--blue); }
 .nav-toggle {
@@ -110,7 +110,7 @@ ul, ol { padding: 0; list-style: none; }
 
 /* Hero */
 .hero { display: flex; flex-wrap: wrap; align-items: center; gap: 56px; padding-block: 40px 88px; }
-.hero__text { flex: 1 1 520px; min-width: 0; }
+.hero__text { flex: 1 1 500px; min-width: 0; }
 .hero__text .eyebrow { margin-bottom: 20px; }
 .hero h1 {
   font-family: var(--font-display); font-weight: 800;
@@ -124,6 +124,23 @@ ul, ol { padding: 0; list-style: none; }
   background: var(--surface); border-radius: 8px; overflow: hidden;
 }
 .hero__media img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.hero__media--video { flex: 1 1 480px; aspect-ratio: 16 / 9; max-height: none; position: relative; background: #0d0f1a; }
+.hero__media--video video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.video-play {
+  position: absolute; inset: 0; width: 100%; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 14px; cursor: pointer;
+  background: linear-gradient(180deg, rgba(13,15,26,0) 40%, rgba(13,15,26,0.62));
+  color: #fff; border: 0; font: inherit; transition: opacity 0.3s ease;
+}
+.video-play__icon {
+  width: 76px; height: 76px; border-radius: 50%; background: var(--blue, #2e3192); color: #fff;
+  display: grid; place-items: center; padding-left: 4px;
+  box-shadow: 0 0 0 10px rgba(255,255,255,0.28); transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.video-play:hover .video-play__icon, .video-play:focus-visible .video-play__icon { transform: scale(1.08); box-shadow: 0 0 0 14px rgba(255,255,255,0.32); }
+.video-play:focus-visible { outline: 3px solid #fff; outline-offset: -6px; }
+.video-play__label { font-weight: 600; font-size: 17px; text-shadow: 0 1px 8px rgba(0,0,0,0.5); }
+.hero__media--video.is-playing .video-play { opacity: 0; pointer-events: none; }
 
 /* Cifras */
 .stats { display: flex; flex-wrap: wrap; gap: 20px; }
@@ -291,6 +308,23 @@ ul, ol { padding: 0; list-style: none; }
 @media (prefers-reduced-motion: reduce) { .faq__item summary::after { transition: none; } }
 .faq__item summary:hover { color: var(--blue); }
 .faq__item p { padding: 0 0 22px; max-width: 680px; color: var(--text); }
+
+/* Instagram */
+.ig { padding: 32px; border-radius: 24px; background: var(--surface); border: 1px solid var(--line-soft); }
+.ig__head { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 20px; }
+.ig__avatar { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; border: 2px solid var(--white); box-shadow: 0 0 0 1px var(--line); background: var(--white); }
+.ig__id { flex: 1 1 260px; min-width: 0; }
+.ig__name { font-family: var(--font-display); font-weight: 700; font-size: 24px; line-height: 1.1; }
+.ig__bio { margin-top: 4px; color: var(--text); font-size: 16px; }
+.ig-feed { margin-top: 24px; }
+.ig-feed:empty { display: none; }
+.ig-feed iframe, .ig-feed > * { max-width: 100%; border-radius: 12px; }
+.ig-feed:not(:empty) ~ .ig-fallback { display: none; }
+.ig-fallback {
+  margin-top: 24px; padding: 32px 24px; border-radius: 16px; background: var(--white); border: 1px dashed var(--line);
+  display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; color: var(--text);
+}
+@media (max-width: 720px) { .ig { padding: 20px; } .ig__follow { width: 100%; } }
 
 /* Contacto */
 .contact { display: flex; flex-wrap: wrap; gap: 56px; padding-block: 96px 112px; }
@@ -488,9 +522,12 @@ body:has(dialog[open]) { overflow: hidden; }
   .container { padding-inline: 20px; }
   .nav { left: 20px; right: 20px; }
   .header { padding-block: 20px 12px; }
-  .brand__logo { height: 48px; }
+  .brand__logo { height: 64px; }
   .hero { padding-block: 24px 64px; gap: 36px; }
   .hero__media { aspect-ratio: 4 / 3; }
+  .hero__media--video { aspect-ratio: 16 / 9; }
+  .video-play__icon { width: 60px; height: 60px; }
+  .video-play__label { font-size: 15px; }
   .hero__actions .btn { flex: 1 1 100%; }
   .section { padding-top: 72px; }
   .stat { min-height: 0; }

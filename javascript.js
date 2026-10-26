@@ -296,3 +296,65 @@ function closeNav() {
     });
   });
 })();
+
+/* Instagram: el widget se carga recién cuando la sección se acerca a la pantalla */
+(function () {
+  var section = document.getElementById("instagram");
+  var tpl = document.getElementById("ig-embed");
+  var feed = section && section.querySelector(".ig-feed");
+  if (!section || !tpl || !feed || !tpl.content || !tpl.content.children.length) return;
+
+  function load() {
+    var frag = tpl.content.cloneNode(true);
+    // los <script> dentro de un template no se ejecutan: los recreamos
+    frag.querySelectorAll("script").forEach(function (old) {
+      var s = document.createElement("script");
+      Array.prototype.forEach.call(old.attributes, function (a) { s.setAttribute(a.name, a.value); });
+      s.text = old.text;
+      old.replaceWith(s);
+    });
+    feed.appendChild(frag);
+    hideWidgetTitle();
+  }
+
+  // El widget trae un título en inglés ("Latest Updates"): lo ocultamos apenas aparece
+  function hideWidgetTitle() {
+    var re = /^\s*latest updates\s*$/i;
+    function sweep() {
+      feed.querySelectorAll("*").forEach(function (el) {
+        if (!el.children.length && re.test(el.textContent)) el.style.display = "none";
+      });
+    }
+    sweep();
+    if (!("MutationObserver" in window)) return;
+    var mo = new MutationObserver(sweep);
+    mo.observe(feed, { childList: true, subtree: true, characterData: true });
+    setTimeout(function () { mo.disconnect(); }, 30000);
+  }
+
+  if (!("IntersectionObserver" in window)) { load(); return; }
+  var io = new IntersectionObserver(function (entries) {
+    if (entries.some(function (e) { return e.isIntersecting; })) { io.disconnect(); load(); }
+  }, { rootMargin: "300px 0px" });
+  io.observe(section);
+})();
+
+/* Video institucional: se descarga recién al tocar play */
+(() => {
+  const box = document.querySelector("[data-video]");
+  if (!box) return;
+  const video = box.querySelector("video");
+  const btn = box.querySelector(".video-play");
+  btn.addEventListener("click", () => {
+    box.classList.add("is-playing");
+    video.controls = true;
+    video.play().catch(() => { video.controls = true; });
+    video.focus({ preventScroll: true });
+  });
+  video.addEventListener("ended", () => {
+    box.classList.remove("is-playing");
+    video.controls = false;
+    video.currentTime = 0;
+    video.load();
+  });
+})();
