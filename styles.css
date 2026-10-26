@@ -327,6 +327,11 @@ ul, ol { padding: 0; list-style: none; }
 .ig-feed { margin-top: 24px; }
 .ig-feed:empty { display: none; }
 .ig-feed iframe, .ig-feed > * { max-width: 100%; border-radius: 12px; }
+/* El widget de EmbedSocial vive en un iframe: no se puede editar por dentro.
+   Subimos el iframe para recortar su cabecera ("Latest Updates" + Follow).
+   Si queda un hueco o se corta de más, ajustá este número (-80px). */
+.ig-feed { overflow: hidden; border-radius: 12px; }
+.ig-feed iframe { display: block; margin-top: -80px; }
 .ig-feed:not(:empty) ~ .ig-fallback { display: none; }
 .ig-fallback {
   margin-top: 24px; padding: 32px 24px; border-radius: 16px; background: var(--white); border: 1px dashed var(--line);
