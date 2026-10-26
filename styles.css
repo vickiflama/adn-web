@@ -211,6 +211,9 @@ ul, ol { padding: 0; list-style: none; }
 .brands-grid__item img { max-width: 100%; max-height: 100%; object-fit: contain; }
 .brands-grid__item--tall { padding: 10px; }
 .brands-dialog__note { margin-top: 24px; }
+.brands-group + .brands-group { margin-top: 36px; padding-top: 28px; border-top: 1px solid var(--line); }
+.brands-group__title { font-family: var(--font-display); font-weight: 700; font-size: 22px; margin-bottom: 18px; }
+@media (max-width: 720px) { .brands-group__title { font-size: 19px; } }
 @media (prefers-reduced-motion: no-preference) {
   .brands-dialog[open] .brands-grid__item { animation: brand-in 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) both; animation-delay: calc(min(var(--i), 8) * 80ms + 120ms); }
   @keyframes brand-in { from { opacity: 0; transform: translateY(14px) scale(0.96); } to { opacity: 1; transform: none; } }
@@ -220,7 +223,7 @@ ul, ol { padding: 0; list-style: none; }
   .brands-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .brands-grid__item { height: 110px; padding: 14px; }
   .brands-grid__item--tall { padding: 6px; }
-  .brands-grid__item:last-child { grid-column: 1 / -1; }
+  .brands-grid__item:last-child:nth-child(odd) { grid-column: 1 / -1; }
 }
 
 /* Marca propia */
