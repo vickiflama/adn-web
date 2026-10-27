@@ -559,3 +559,14 @@ body:has(dialog[open]) { overflow: hidden; }
   .whatsapp-fab { right: 16px; bottom: 16px; }
   .faq__item summary { font-size: 18px; }
 }
+
+/* Marca de agua ADN detrás de la sección de contacto */
+.contact { position: relative; isolation: isolate; }
+.contact::before {
+    content: ""; position: absolute; top: 0; bottom: 0; left: 50%;
+    width: 100vw; transform: translateX(-50%); z-index: -1; pointer-events: none;
+    background: url("img/marca-agua.png") no-repeat center center / 100% auto;
+    opacity: 0.09;
+}
+body { overflow-x: clip; }
+@media (max-width: 720px) { .contact::before { background-position: center 150px; background-size: 140% auto; } }
