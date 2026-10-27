@@ -608,3 +608,15 @@ body { overflow-x: clip; }
     border-top: 4px solid var(--blue);
     box-shadow: 0 10px 30px rgba(46, 48, 147, 0.10);
 }
+
+/* Inicio y números con fondo lila */
+.header, .hero { position: relative; isolation: isolate; }
+.header::before, .hero::before {
+    content: ""; position: absolute; top: 0; bottom: 0; left: 50%;
+    width: 100vw; transform: translateX(-50%); z-index: -1; pointer-events: none;
+    background: #eceefa;
+}
+.stats-band {
+    background: linear-gradient(180deg, #eceefa 0%, #dfe2f4 100%);
+    padding-bottom: 72px;
+}
