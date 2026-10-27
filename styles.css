@@ -576,3 +576,18 @@ body { overflow-x: clip; }
 #contacto.contact::after { content: ""; position: absolute; top: 0; bottom: 0; left: 50%; width: 100vw; transform: translateX(-50%); z-index: -1; pointer-events: none; background: url("img/marca-agua.png") no-repeat center center / 100% auto; filter: brightness(0) invert(1); opacity: 0.1; }
 #contacto .contact__info, #contacto .contact__info .eyebrow, #contacto .contact__info .h2, #contacto .contact__info > p, #contacto .contact__label, #contacto .contact__list, #contacto .contact__info a { color: #fff; }
 @media (max-width: 720px) { #contacto.contact::after { background-position: center 150px; background-size: 150% auto; } }
+
+
+
+/* Gran Prix Mayorista */
+.about__link {
+    color: inherit;
+    text-decoration: underline dotted;
+    text-decoration-color: rgba(0, 0, 0, 0.35);
+    text-underline-offset: 3px;
+    transition: color .2s, text-decoration-color .2s;
+}
+.about__link:hover {
+    color: var(--blue);
+    text-decoration-color: var(--blue);
+}
