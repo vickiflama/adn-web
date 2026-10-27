@@ -591,3 +591,20 @@ body { overflow-x: clip; }
     color: var(--blue);
     text-decoration-color: var(--blue);
 }
+
+
+#como.band--blue::before {
+    background:
+        linear-gradient(rgba(46, 48, 147, 0.86), rgba(46, 48, 147, 0.86)),
+        url("img/reparto.jpg") center / cover no-repeat;
+}
+
+/* Quiénes somos: fondo lila y tarjetas con línea azul */
+#nosotros.band--tint::before {
+    background: linear-gradient(180deg, #eceefa 0%, #dfe2f4 100%);
+}
+#nosotros .pillar {
+    background: #fff;
+    border-top: 4px solid var(--blue);
+    box-shadow: 0 10px 30px rgba(46, 48, 147, 0.10);
+}
