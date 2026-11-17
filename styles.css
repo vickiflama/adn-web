@@ -632,3 +632,5 @@ body { overflow-x: clip; }
 .hero .eyebrow { color: #c9cdf5; }
 .hero .btn--ghost { color: #fff; border-color: rgba(255,255,255,.7); background: transparent; }
 @media (max-width: 900px) { .hero__video-link { right: auto; left: 20px; bottom: 24px; } }
+.stats-band { padding-top: 56px; }
+@media (max-width: 900px) { .stats-band { padding-top: 40px; } }
