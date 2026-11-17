@@ -620,3 +620,15 @@ body { overflow-x: clip; }
     background: linear-gradient(180deg, #eceefa 0%, #dfe2f4 100%);
     padding-bottom: 72px;
 }
+/* Hero: video de fondo a todo el ancho con el texto encima */
+.hero { min-height: min(86vh, 760px); padding-block: 80px; color: #fff; }
+.hero::before { background: none !important; }
+.hero__side { position: absolute; top: 0; bottom: 0; left: 50%; width: 100vw; transform: translateX(-50%); z-index: -1; display: block; }
+.hero__media--loop { aspect-ratio: auto; height: 100%; border-radius: 0; }
+.hero__side::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(13,15,40,.82) 0%, rgba(13,15,40,.55) 55%, rgba(13,15,40,.25) 100%); }
+.hero__video-link { position: absolute; z-index: 2; right: max(32px, calc(50vw - 595px)); bottom: 28px; color: #fff; }
+.hero h1, .hero__lead { color: #fff; }
+.hero .accent { color: #ff5a5f; }
+.hero .eyebrow { color: #c9cdf5; }
+.hero .btn--ghost { color: #fff; border-color: rgba(255,255,255,.7); background: transparent; }
+@media (max-width: 900px) { .hero__video-link { right: auto; left: 20px; bottom: 24px; } }
